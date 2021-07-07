@@ -1,0 +1,92 @@
+components.vue - Dateiinhalt alt
+
+// <template>
+  //   <div class="flex space-x-20">
+    //     <div>
+      //       Sidebar
+      //
+    </div>
+    //     <div>
+      //       <nuxt-child />
+      //
+    </div>
+    //
+  </div>
+  //
+</template>
+
+index.vue
+
+<template>
+  <div class=" bg-indigo-700 md:flex md:flex-shrink-0">
+    <div class="flex flex-col w-64">
+      <div class="mt-5 flex-1 flex flex-col">
+        <!-- <nav class="flex-1 px-2 space-y-1">
+          <a v-for="(component, index) in components" :key="index" href="#" class="bg-indigo-800 text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md" />
+        </nav> -->
+        <div
+          v-for="(category, index) in categories"
+          :key="index"
+          class="text-white text-2xl my-4"
+          @click="setIndex(index)"
+        >
+          {{ category }}
+        </div>
+      </div>
+      <nuxt-child />
+    </div>
+  </div>
+  </div>
+</template>
+
+<script>
+
+export default {
+
+  data () {
+    return {
+      categories: [],
+      fruits: this.$store.state.fruits.fruits
+    }
+  },
+
+  computed: {
+    components () {
+      return this.$store.state.components
+    }
+  },
+
+  mounted () {
+    console.log(this.$store)
+    this.getCategories(this.categories)
+    this.removeDuplicates()
+  },
+
+  methods: {
+    getCategories (array) {
+      for (let i = 0; i < this.$store.state.components.length; i++) {
+        array.push(this.$store.state.components[i].category)
+      }
+      return array
+    },
+    removeDuplicates () {
+      this.categories = [...new Set(this.categories)]
+    }
+  }
+
+}
+</script>
+
+<style lang="postcss" scoped>
+
+</style>
+
+
+          <!-- <Card /> -->
+          <!-- <component :is="component" />
+          <h1>{{ idinfo }}</h1>
+          <button @click="component = 'logo'">
+            Click me
+          </button>
+        </div> -->
+          <!-- /End replace -->
